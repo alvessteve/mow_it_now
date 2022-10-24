@@ -13,8 +13,8 @@ public class MowService {
     private final GrassService grassService;
 
     public MowService(MowRepository mowRepository, GrassService grassService) {
-        this.grassService = new GrassService(new InMemoryGrassRepository());
-        this.mowRepository = new InMemoryMowRepository();
+        this.grassService = grassService;
+        this.mowRepository = mowRepository;
     }
 
     public void create(String instruction){
@@ -29,5 +29,21 @@ public class MowService {
         } else {
             throw new IndexOutOfBoundsException();
         }
+    }
+
+    public void rotateClockwise() {
+        Mow mow = mowRepository.currentMowMoving();
+        mow.rotateClockwise();
+    }
+
+    public void rotateCounterclockwise() {
+        Mow mow = mowRepository.currentMowMoving();
+        mow.rotateCounterclockwise();
+    }
+
+    public void forward() {
+        Grass grass = grassService.retrieve();
+        Mow mow = mowRepository.currentMowMoving();
+        mow.forward(grass);
     }
 }

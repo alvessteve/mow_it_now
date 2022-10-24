@@ -12,14 +12,14 @@ class MoveMowInstructionTest {
     void should_return_left_instruction() {
         MoveMowInstruction mowInstruction = MoveMowInstruction.fromLibelle('G');
 
-        assertThat(mowInstruction).isInstanceOf(MoveMowOnTheLeftInstruction.class);
+        assertThat(mowInstruction).isInstanceOf(RotateLeftInstruction.class);
     }
 
     @Test
     void should_return_right_instruction() {
         MoveMowInstruction mowInstruction = MoveMowInstruction.fromLibelle('D');
 
-        assertThat(mowInstruction).isInstanceOf(MoveMowOnTheRightInstruction.class);
+        assertThat(mowInstruction).isInstanceOf(RotateRightInstruction.class);
     }
 
     @Test

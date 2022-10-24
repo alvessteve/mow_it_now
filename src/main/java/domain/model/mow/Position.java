@@ -11,4 +11,11 @@ public class Position {
     private Coordinates coordinates;
     private Orientation orientation;
 
+    public void rotateClockwise() {
+        this.orientation = orientation.clockwise();
+    }
+
+    public void rotateCounterclockwise() {
+        this.orientation = orientation.counterclockwise();
+    }
 }

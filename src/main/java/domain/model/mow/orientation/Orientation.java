@@ -19,7 +19,7 @@ public abstract class Orientation {
         throw new IllegalArgumentException("incorrect Orientation Label : " + libelle);
     }
 
-    public abstract Orientation spinRight();
-    public abstract Orientation spinLeft();
+    public abstract Orientation clockwise();
+    public abstract Orientation counterclockwise();
 
 }

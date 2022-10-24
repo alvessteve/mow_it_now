@@ -2,12 +2,12 @@ package domain.model.mow.orientation;
 
 public class SouthOrientation extends Orientation {
     @Override
-    public Orientation spinRight() {
+    public Orientation clockwise() {
         return new WestOrientation();
     }
 
     @Override
-    public Orientation spinLeft() {
+    public Orientation counterclockwise() {
         return new EastOrientation();
     }
 }

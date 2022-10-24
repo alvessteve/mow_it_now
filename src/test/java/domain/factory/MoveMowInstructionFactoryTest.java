@@ -3,8 +3,8 @@ package domain.factory;
 import domain.model.instructions.Instruction;
 import domain.model.instructions.mow.MoveMowForwardInstruction;
 import domain.model.instructions.mow.MoveMowInstructionList;
-import domain.model.instructions.mow.MoveMowOnTheLeftInstruction;
-import domain.model.instructions.mow.MoveMowOnTheRightInstruction;
+import domain.model.instructions.mow.RotateLeftInstruction;
+import domain.model.instructions.mow.RotateRightInstruction;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EmptySource;
@@ -26,8 +26,8 @@ class MoveMowInstructionFactoryTest {
 
         MoveMowInstructionList mowInstructionList = (MoveMowInstructionList) instruction;
         assertThat(mowInstructionList.getMoveMowInstructions()).hasSize(3);
-        assertThat(mowInstructionList.getMoveMowInstructions().get(0)).isInstanceOf(MoveMowOnTheLeftInstruction.class);
-        assertThat(mowInstructionList.getMoveMowInstructions().get(1)).isInstanceOf(MoveMowOnTheRightInstruction.class);
+        assertThat(mowInstructionList.getMoveMowInstructions().get(0)).isInstanceOf(RotateLeftInstruction.class);
+        assertThat(mowInstructionList.getMoveMowInstructions().get(1)).isInstanceOf(RotateRightInstruction.class);
         assertThat(mowInstructionList.getMoveMowInstructions().get(2)).isInstanceOf(MoveMowForwardInstruction.class);
     }
 
