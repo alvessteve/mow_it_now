@@ -7,7 +7,7 @@ public class GrassCreationInstruction extends Instruction {
 
     public final static String CREATION_GRASS_INSTRUCTION_FORMAT = "^\\d \\d$";
 
-    private GrassService grassService;
+    private final GrassService grassService;
 
     public GrassCreationInstruction(String content) {
         super(content);
