@@ -12,20 +12,20 @@ public class Coordinates {
     int x;
     int y;
 
-    public void up() {
-        this.y += 1;
+    public Coordinates up() {
+        return new Coordinates(x, y + 1);
     }
 
-    public void down(){
-        this.y -=1 ;
+    public  Coordinates down(){
+        return new Coordinates(x, y - 1);
     }
 
-    public void right(){
-        this.x +=1;
+    public Coordinates right(){
+        return new Coordinates(x+ 1, y);
     }
 
-    public void left(){
-        this.x -=1;
+    public Coordinates left(){
+        return new Coordinates(x - 1, y);
     }
 
 }

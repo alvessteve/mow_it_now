@@ -1,5 +1,7 @@
 package domain.model.mow.orientation;
 
+import domain.model.mow.Coordinates;
+
 public abstract class Orientation {
 
     public final static String NORTH_INSTRUCTION = "N";
@@ -21,5 +23,6 @@ public abstract class Orientation {
 
     public abstract Orientation clockwise();
     public abstract Orientation counterclockwise();
+    public abstract Coordinates forward(Coordinates coordinates);
 
 }

@@ -18,4 +18,9 @@ public class Position {
     public void rotateCounterclockwise() {
         this.orientation = orientation.counterclockwise();
     }
+
+    public Position move() {
+        Coordinates newCoordinates = orientation.forward(this.coordinates);
+        return new Position(newCoordinates, orientation);
+    }
 }

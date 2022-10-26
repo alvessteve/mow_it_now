@@ -1,7 +1,5 @@
 package domain.service;
 
-import adapters.repositories.InMemoryGrassRepository;
-import adapters.repositories.InMemoryMowRepository;
 import domain.factory.MowFactory;
 import domain.model.Grass;
 import domain.model.mow.Mow;
@@ -44,6 +42,6 @@ public class MowService {
     public void forward() {
         Grass grass = grassService.retrieve();
         Mow mow = mowRepository.currentMowMoving();
-        mow.forward(grass);
+        mow.move(grass);
     }
 }

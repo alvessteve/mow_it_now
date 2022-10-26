@@ -1,5 +1,7 @@
 package domain.model.mow.orientation;
 
+import domain.model.mow.Coordinates;
+
 public class SouthOrientation extends Orientation {
     @Override
     public Orientation clockwise() {
@@ -9,5 +11,10 @@ public class SouthOrientation extends Orientation {
     @Override
     public Orientation counterclockwise() {
         return new EastOrientation();
+    }
+
+    @Override
+    public Coordinates forward(Coordinates coordinates) {
+        return coordinates.down();
     }
 }

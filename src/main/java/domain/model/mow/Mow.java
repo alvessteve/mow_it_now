@@ -18,7 +18,12 @@ public class Mow {
         position.rotateCounterclockwise();
     }
 
-    public void forward(Grass grass) {
-
+    public void move(Grass grass) {
+        Position newPosition = position.move();
+        if(!grass.outOfBounds(newPosition.getCoordinates())) {
+            position = newPosition;
+        } else {
+            throw new IllegalArgumentException("out of bound move");
+        }
     }
 }
