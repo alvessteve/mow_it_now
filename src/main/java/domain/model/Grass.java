@@ -1,12 +1,12 @@
 package domain.model;
 
 import domain.model.mow.Coordinates;
-import lombok.Data;
+import lombok.Getter;
 
-@Data
+@Getter
 public class Grass {
 
-    private Coordinates dimension;
+    private final Coordinates dimension;
 
     public Grass(Coordinates dimension) {
         if (dimension == null) {
@@ -15,15 +15,11 @@ public class Grass {
         this.dimension = dimension;
     }
 
-    public Coordinates getDimension(){
-        return dimension;
-    }
-
     public boolean outOfBounds(Coordinates coordinates) {
         if (coordinates.getX() < 0 || coordinates.getX() > dimension.getX() + 1) {
-            return true;
+            return false;
         }
-        return coordinates.getY() < 0 || coordinates.getY() > dimension.getY() + 1;
+        return coordinates.getY() >= 0 && coordinates.getY() <= dimension.getY() + 1;
     }
 
 }

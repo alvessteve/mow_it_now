@@ -1,10 +1,8 @@
-import adapters.InstructionsTranslator;
 import adapters.file.FileAdapter;
 import adapters.input.InputAdapter;
-import adapters.outputs.TerminalOutput;
-import adapters.repositories.InMemoryGrassRepository;
-import domain.ClientUseCase;
-import domain.service.GrassService;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+import infrastructure.dependencyinversion.MowitnowModule;
 
 public class Application {
 
@@ -17,14 +15,14 @@ public class Application {
     }
 
     private static void initializeFromInput(String[] args) {
-        //FIXME
-        InputAdapter inputAdapter = new InputAdapter(new InstructionsTranslator(), new ClientUseCase(new TerminalOutput(), new GrassService(new InMemoryGrassRepository())));
+        Injector injector = Guice.createInjector(new MowitnowModule());
+        InputAdapter inputAdapter = injector.getInstance(InputAdapter.class);
         inputAdapter.call(args);
     }
 
     private static void initializeFromFile(String filePath) {
-        //FIXME
-        FileAdapter fileAdapter = new FileAdapter(new ClientUseCase(new TerminalOutput(), new GrassService(new InMemoryGrassRepository())), new InstructionsTranslator());
+        Injector injector = Guice.createInjector(new MowitnowModule());
+        FileAdapter fileAdapter = injector.getInstance(FileAdapter.class);
         fileAdapter.call(filePath);
     }
 

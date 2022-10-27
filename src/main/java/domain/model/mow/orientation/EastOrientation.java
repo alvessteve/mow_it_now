@@ -17,4 +17,9 @@ public class EastOrientation extends Orientation {
     public Coordinates forward(Coordinates coordinates) {
         return coordinates.right();
     }
+
+    @Override
+    public String toString() {
+        return "E";
+    }
 }

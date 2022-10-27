@@ -1,11 +1,13 @@
 package domain.model.mow;
 
 import domain.model.mow.orientation.Orientation;
-import lombok.Builder;
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
 
-@Data
-@Builder
+@Getter
+@EqualsAndHashCode
+@AllArgsConstructor
 public class Position {
 
     private Coordinates coordinates;
@@ -22,5 +24,10 @@ public class Position {
     public Position move() {
         Coordinates newCoordinates = orientation.forward(this.coordinates);
         return new Position(newCoordinates, orientation);
+    }
+
+    @Override
+    public String toString() {
+        return coordinates.toString() + " " + orientation.toString();
     }
 }

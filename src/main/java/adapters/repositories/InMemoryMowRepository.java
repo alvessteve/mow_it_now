@@ -2,16 +2,16 @@ package adapters.repositories;
 
 
 import domain.model.mow.Mow;
-import lombok.Data;
+import lombok.NoArgsConstructor;
 import ports.MowRepository;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
-@Data
+@NoArgsConstructor
 public class InMemoryMowRepository implements MowRepository {
 
-    private Set<Mow> mowList = new HashSet<>();
+    private List<Mow> mowList = new ArrayList<>();
     private Mow currentMowMoving;
 
     @Override
@@ -30,6 +30,11 @@ public class InMemoryMowRepository implements MowRepository {
         if(mow == null)
             throw new IllegalStateException("No mow is moving");
         return mow;
+    }
+
+    @Override
+    public List<Mow> all() {
+        return mowList;
     }
 
 }

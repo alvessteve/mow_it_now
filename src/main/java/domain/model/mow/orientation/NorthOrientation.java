@@ -19,4 +19,8 @@ public class NorthOrientation extends Orientation {
         return coordinates.up();
     }
 
+    @Override
+    public String toString() {
+        return "N";
+    }
 }

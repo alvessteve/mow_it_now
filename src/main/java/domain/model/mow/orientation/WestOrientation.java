@@ -18,4 +18,8 @@ public class WestOrientation extends Orientation {
         return coordinates.left();
     }
 
+    @Override
+    public String toString() {
+        return "W";
+    }
 }

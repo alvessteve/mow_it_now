@@ -1,11 +1,11 @@
 package domain.model.instructions.mow;
 
 import domain.model.instructions.Instruction;
-import lombok.Data;
+import lombok.Getter;
 
 import java.util.List;
 
-@Data
+@Getter
 public class MoveMowInstructionList extends Instruction {
 
     private final List<MoveMowInstruction> moveMowInstructions;

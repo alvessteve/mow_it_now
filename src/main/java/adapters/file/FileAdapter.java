@@ -1,8 +1,11 @@
 package adapters.file;
 
 import adapters.InstructionsTranslator;
+import com.google.inject.Inject;
 import domain.model.instructions.Instruction;
-import domain.ClientUseCase;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import ports.Client;
 import utils.StringValidator;
 
 import java.io.IOException;
@@ -13,7 +16,12 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Stream;
 
-public record FileAdapter(ClientUseCase client, InstructionsTranslator inputTranslator) {
+@AllArgsConstructor(access = AccessLevel.PUBLIC, onConstructor = @__({ @Inject}))
+public class FileAdapter {
+
+    private final Client client;
+    private final InstructionsTranslator inputTranslator;
+
     public void call(String filePath) {
         if(StringValidator.isNullOrEmpty(filePath))
             throw new IllegalArgumentException("A file path must be provided");

@@ -17,12 +17,14 @@ public class MowFactory {
     public static Mow build(String instruction) {
         String[] positionDetails = instruction.split(SEPARATOR);
 
-        Coordinates coordinates = Coordinates.builder().x(parseInt(positionDetails[X_COORDINATES_INDEX])).y(parseInt(positionDetails[Y_COORDINATES_INDEX])).build();
+        var x = parseInt(positionDetails[X_COORDINATES_INDEX]);
+        var y = parseInt(positionDetails[Y_COORDINATES_INDEX]);
+        var coordinates = new Coordinates(x, y);
 
-        Orientation orientation = Orientation.fromLibelle(positionDetails[ORIENTATION_INDEX]);
+        var orientation = Orientation.fromLibelle(positionDetails[ORIENTATION_INDEX]);
 
-        Position position = Position.builder().coordinates(coordinates).orientation(orientation).build();
+        var position = new Position(coordinates, orientation);
 
-        return Mow.builder().position(position).build();
+        return new Mow(position);
     }
 }

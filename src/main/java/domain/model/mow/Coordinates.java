@@ -1,11 +1,11 @@
 package domain.model.mow;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
 
-@Data
-@Builder
+@Getter
+@EqualsAndHashCode
 @AllArgsConstructor
 public class Coordinates {
 
@@ -28,4 +28,8 @@ public class Coordinates {
         return new Coordinates(x - 1, y);
     }
 
+    @Override
+    public String toString() {
+        return x + " " + y;
+    }
 }

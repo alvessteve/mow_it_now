@@ -1,9 +1,9 @@
 package ports;
 
-import domain.model.Grass;
 import domain.model.mow.Mow;
 
+import java.util.Collection;
+
 public interface Displayer {
-    void mowPosition(Mow now);
-    void grassDimension(Grass grass);
+    void mowsPosition(Collection<Mow> mows);
 }

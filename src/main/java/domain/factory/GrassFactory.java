@@ -20,7 +20,7 @@ public class GrassFactory {
             throw new IllegalArgumentException("wrong grass creation instruction format : " + content);
 
         String[] positionDetails = content.split(SEPARATOR);
-        Coordinates coordinates = new Coordinates(parseInt(positionDetails[X_COORDINATES_INDEX]), parseInt(positionDetails[Y_COORDINATES_INDEX]));
+        var coordinates = new Coordinates(parseInt(positionDetails[X_COORDINATES_INDEX]), parseInt(positionDetails[Y_COORDINATES_INDEX]));
         return new Grass(coordinates);
     }
 }

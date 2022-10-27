@@ -1,6 +1,5 @@
 package domain.model.instructions;
 
-import adapters.repositories.InMemoryGrassRepository;
 import domain.service.GrassService;
 
 public class GrassCreationInstruction extends Instruction {
@@ -9,12 +8,8 @@ public class GrassCreationInstruction extends Instruction {
 
     private final GrassService grassService;
 
-    public GrassCreationInstruction(String content) {
+    public GrassCreationInstruction(String content, GrassService grassService) {
         super(content);
-        this.grassService = new GrassService(new InMemoryGrassRepository());
-    }
-
-    public GrassCreationInstruction(GrassService grassService) {
         this.grassService = grassService;
     }
 

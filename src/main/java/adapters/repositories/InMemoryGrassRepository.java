@@ -1,10 +1,10 @@
 package adapters.repositories;
 
 import domain.model.Grass;
-import lombok.Data;
+import lombok.NoArgsConstructor;
 import ports.GrassRepository;
 
-@Data
+@NoArgsConstructor
 public class InMemoryGrassRepository implements GrassRepository {
 
     private Grass grass;

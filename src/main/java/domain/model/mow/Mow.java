@@ -1,11 +1,11 @@
 package domain.model.mow;
 
 import domain.model.Grass;
-import lombok.Builder;
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
-@Data
-@Builder
+@Getter
+@AllArgsConstructor
 public class Mow {
 
     private Position position;
@@ -20,10 +20,15 @@ public class Mow {
 
     public void move(Grass grass) {
         Position newPosition = position.move();
-        if(!grass.outOfBounds(newPosition.getCoordinates())) {
+        if(grass.outOfBounds(newPosition.getCoordinates())) {
             position = newPosition;
         } else {
             throw new IllegalArgumentException("out of bound move");
         }
+    }
+
+    @Override
+    public String toString() {
+        return position.toString();
     }
 }

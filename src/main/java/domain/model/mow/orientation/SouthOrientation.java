@@ -17,4 +17,9 @@ public class SouthOrientation extends Orientation {
     public Coordinates forward(Coordinates coordinates) {
         return coordinates.down();
     }
+
+    @Override
+    public String toString() {
+        return "S";
+    }
 }

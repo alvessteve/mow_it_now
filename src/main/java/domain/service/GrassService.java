@@ -1,20 +1,19 @@
 package domain.service;
 
-import adapters.repositories.InMemoryGrassRepository;
+import com.google.inject.Inject;
 import domain.factory.GrassFactory;
 import domain.model.Grass;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import ports.GrassRepository;
 
+@AllArgsConstructor(access = AccessLevel.PRIVATE, onConstructor = @__({ @Inject}))
 public class GrassService {
 
     private final GrassRepository grassRepository;
 
-    public GrassService(GrassRepository grassRepository) {
-        this.grassRepository = new InMemoryGrassRepository();
-    }
-
     public void create(String coordinates) {
-        Grass grass = GrassFactory.build(coordinates);
+        var grass = GrassFactory.build(coordinates);
         grassRepository.save(grass);
     }
 

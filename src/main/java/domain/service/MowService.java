@@ -1,27 +1,23 @@
 package domain.service;
 
+import com.google.inject.Inject;
 import domain.factory.MowFactory;
-import domain.model.Grass;
-import domain.model.mow.Mow;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import ports.MowRepository;
 
+@AllArgsConstructor(access = AccessLevel.PRIVATE, onConstructor = @__({ @Inject}))
 public class MowService {
 
     private final MowRepository mowRepository;
     private final GrassService grassService;
 
-    public MowService(MowRepository mowRepository, GrassService grassService) {
-        this.grassService = grassService;
-        this.mowRepository = mowRepository;
-    }
-
     public void create(String instruction){
 
-        Mow mow = MowFactory.build(instruction);
+        var mow = MowFactory.build(instruction);
+        var grass = grassService.retrieve();
 
-        Grass grass = grassService.retrieve();
-
-        if(!grass.outOfBounds(mow.getPosition().getCoordinates())){
+        if(grass.outOfBounds(mow.getPosition().getCoordinates())){
             mowRepository.add(mow);
             mowRepository.setToCurrentMowMowing(mow);
         } else {
@@ -30,18 +26,18 @@ public class MowService {
     }
 
     public void rotateClockwise() {
-        Mow mow = mowRepository.currentMowMoving();
+        var mow = mowRepository.currentMowMoving();
         mow.rotateClockwise();
     }
 
     public void rotateCounterclockwise() {
-        Mow mow = mowRepository.currentMowMoving();
+        var mow = mowRepository.currentMowMoving();
         mow.rotateCounterclockwise();
     }
 
     public void forward() {
-        Grass grass = grassService.retrieve();
-        Mow mow = mowRepository.currentMowMoving();
+        var grass = grassService.retrieve();
+        var mow = mowRepository.currentMowMoving();
         mow.move(grass);
     }
 }

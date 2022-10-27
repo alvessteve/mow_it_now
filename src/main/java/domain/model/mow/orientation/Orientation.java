@@ -1,7 +1,9 @@
 package domain.model.mow.orientation;
 
 import domain.model.mow.Coordinates;
+import lombok.EqualsAndHashCode;
 
+@EqualsAndHashCode
 public abstract class Orientation {
 
     public final static String NORTH_INSTRUCTION = "N";
