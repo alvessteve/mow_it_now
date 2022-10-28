@@ -1,5 +1,6 @@
 package domain;
 
+import adapters.InstructionsTranslator;
 import com.google.inject.Inject;
 import domain.model.instructions.Instruction;
 import lombok.AccessLevel;
@@ -14,10 +15,12 @@ import java.util.Collection;
 public class ClientUseCase implements Client {
 
     private final Displayer displayer;
+    private final InstructionsTranslator inputTranslator;
     private final MowRepository mowRepository;
 
     @Override
-    public void execute(Collection<Instruction> instructions) {
+    public void execute(Collection<String> rawInstructions) {
+        Collection<Instruction> instructions = inputTranslator.translateToInstruction(rawInstructions);
         instructions.forEach(Instruction::execute);
         displayer.mowsPosition(mowRepository.all());
     }

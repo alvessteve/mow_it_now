@@ -42,7 +42,7 @@ class MoveMowInstructionFactoryTest {
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
-        Injector injector = Guice.createInjector(Modules.override(new MowitnowModule()).with(BoundFieldModule.of(this)));
+        injector = Guice.createInjector(Modules.override(new MowitnowModule()).with(BoundFieldModule.of(this)));
         moveMowInstructionFactory = injector.getInstance(MoveMowInstructionFactory.class);
     }
 
