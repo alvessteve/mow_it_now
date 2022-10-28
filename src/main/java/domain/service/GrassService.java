@@ -1,5 +1,6 @@
 package domain.service;
 
+import adapters.repositories.EntityNotFoundException;
 import com.google.inject.Inject;
 import domain.factory.GrassFactory;
 import domain.model.Grass;
@@ -18,6 +19,6 @@ public class GrassService {
     }
 
     public Grass retrieve(){
-        return grassRepository.fetch();
+        return grassRepository.fetch().orElseThrow(() -> new EntityNotFoundException("Grass not found"));
     }
 }

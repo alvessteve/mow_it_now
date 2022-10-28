@@ -9,9 +9,8 @@ public class Grass {
     private final Coordinates dimension;
 
     public Grass(Coordinates dimension) {
-        if (dimension == null) {
-            throw new IllegalArgumentException("null sizing to generate a grass...");
-        }
+        if (dimension == null)
+            throw new IllegalArgumentException("null sizing to generate a grass");
         this.dimension = dimension;
     }
 
@@ -22,4 +21,8 @@ public class Grass {
         return coordinates.getY() >= 0 && coordinates.getY() <= dimension.getY() + 1;
     }
 
+    @Override
+    public String toString() {
+        return dimension.toString();
+    }
 }

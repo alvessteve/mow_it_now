@@ -1,6 +1,7 @@
 package domain.factory;
 
 import com.google.inject.Inject;
+import domain.exceptions.MalformedInstructionException;
 import domain.model.instructions.Instruction;
 import domain.model.instructions.mow.*;
 import domain.service.MowService;
@@ -43,6 +44,6 @@ public class MoveMowInstructionFactory {
             return new RotateLeftInstruction(mowService);
         if(ROTATE_RIGHT_INSTRUCTION == libelle)
             return new RotateRightInstruction(mowService);
-        throw new IllegalArgumentException("Incorrect move mow instruction " + libelle);
+        throw new MalformedInstructionException("Incorrect move mow instruction " + libelle);
     }
 }

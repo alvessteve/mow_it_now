@@ -12,7 +12,7 @@ public class MoveMowInstructionList extends Instruction {
 
     public MoveMowInstructionList(List<MoveMowInstruction> moveMowInstructions) {
         if(moveMowInstructions.isEmpty())
-            throw new IllegalArgumentException("No instructions have been passed");
+            throw new IllegalArgumentException("No move mow instructions have been passed");
         this.moveMowInstructions = moveMowInstructions;
     }
 

@@ -5,7 +5,7 @@ import domain.service.MowService;
 
 public class MowCreationInstruction extends Instruction {
 
-    public final static String CREATION_MOW_INSTRUCTION_FORMAT = "^\\d \\d [N,E,W,S]{1}$";
+    public final static String CREATION_MOW_INSTRUCTION_FORMAT = "^\\d+ \\d+ [N,E,W,S]{1}$";
 
     private final MowService mowService;
 

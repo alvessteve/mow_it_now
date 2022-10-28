@@ -1,6 +1,6 @@
 package domain;
 
-import adapters.InstructionsTranslator;
+import domain.service.InstructionsTranslator;
 import com.google.inject.Inject;
 import domain.model.instructions.Instruction;
 import lombok.AccessLevel;

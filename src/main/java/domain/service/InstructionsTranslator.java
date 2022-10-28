@@ -1,4 +1,4 @@
-package adapters;
+package domain.service;
 
 import com.google.inject.Inject;
 import domain.factory.InstructionFactory;

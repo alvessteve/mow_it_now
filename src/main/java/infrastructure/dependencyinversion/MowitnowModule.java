@@ -1,6 +1,6 @@
 package infrastructure.dependencyinversion;
 
-import adapters.InstructionsTranslator;
+import domain.service.InstructionsTranslator;
 import adapters.file.FileAdapter;
 import adapters.input.InputAdapter;
 import adapters.outputs.TerminalOutput;

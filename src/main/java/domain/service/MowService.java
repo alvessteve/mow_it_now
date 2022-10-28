@@ -1,5 +1,6 @@
 package domain.service;
 
+import adapters.repositories.EntityNotFoundException;
 import com.google.inject.Inject;
 import domain.factory.MowFactory;
 import lombok.AccessLevel;
@@ -26,18 +27,18 @@ public class MowService {
     }
 
     public void rotateClockwise() {
-        var mow = mowRepository.currentMowMoving();
+        var mow = mowRepository.currentMowMoving().orElseThrow(() -> new EntityNotFoundException("No mow moving"));
         mow.rotateClockwise();
     }
 
     public void rotateCounterclockwise() {
-        var mow = mowRepository.currentMowMoving();
+        var mow = mowRepository.currentMowMoving().orElseThrow(() -> new EntityNotFoundException("No mow moving"));
         mow.rotateCounterclockwise();
     }
 
     public void forward() {
         var grass = grassService.retrieve();
-        var mow = mowRepository.currentMowMoving();
+        var mow = mowRepository.currentMowMoving().orElseThrow(() -> new EntityNotFoundException("No mow moving"));
         mow.move(grass);
     }
 }

@@ -1,6 +1,7 @@
 package domain.factory;
 
 import com.google.inject.Inject;
+import domain.exceptions.MalformedInstructionException;
 import domain.model.instructions.GrassCreationInstruction;
 import domain.model.instructions.Instruction;
 import domain.model.instructions.mow.MoveMowInstruction;
@@ -29,6 +30,6 @@ public class InstructionFactory {
         if(rawInstructions.matches(MoveMowInstruction.MOVE_MOW_INSTRUCTION))
             return moveMowInstructionFactory.build(rawInstructions);
 
-        throw new IllegalArgumentException("Instruction not translated " + rawInstructions);
+        throw new MalformedInstructionException("Incorrect format for instructions : " + rawInstructions);
     }
 }

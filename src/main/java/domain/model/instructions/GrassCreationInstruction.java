@@ -4,7 +4,7 @@ import domain.service.GrassService;
 
 public class GrassCreationInstruction extends Instruction {
 
-    public final static String CREATION_GRASS_INSTRUCTION_FORMAT = "^\\d \\d$";
+    public final static String CREATION_GRASS_INSTRUCTION_FORMAT = "^\\d+ \\d+$";
 
     private final GrassService grassService;
 

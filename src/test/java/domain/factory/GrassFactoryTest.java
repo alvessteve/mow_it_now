@@ -1,5 +1,6 @@
 package domain.factory;
 
+import domain.exceptions.MalformedInstructionException;
 import domain.model.Grass;
 import domain.model.mow.Coordinates;
 import org.junit.jupiter.api.Test;
@@ -24,10 +25,18 @@ class GrassFactoryTest {
     }
 
     @ParameterizedTest
+    @ValueSource(strings = {" ", "1", "agd"})
+    public void should_throw_malformed_exception(String value){
+        assertThrows(MalformedInstructionException.class, () -> {
+            GrassFactory.build(value);
+        });
+    }
+
+    @ParameterizedTest
     @EmptySource
     @NullSource
-    @ValueSource(strings = {"", " ", "1", "a b"})
-    public void should_throw_error(String value){
+    @ValueSource(strings = {""})
+    public void should_throw_illegal_argument_exception(String value){
         assertThrows(IllegalArgumentException.class, () -> {
             GrassFactory.build(value);
         });

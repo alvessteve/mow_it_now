@@ -7,11 +7,14 @@ import ports.MowRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
+import static java.util.Optional.ofNullable;
 
 @NoArgsConstructor
 public class InMemoryMowRepository implements MowRepository {
 
-    private List<Mow> mowList = new ArrayList<>();
+    private final List<Mow> mowList = new ArrayList<>();
     private Mow currentMowMoving;
 
     @Override
@@ -25,11 +28,8 @@ public class InMemoryMowRepository implements MowRepository {
     }
 
     @Override
-    public Mow currentMowMoving() {
-        Mow mow = currentMowMoving;
-        if(mow == null)
-            throw new IllegalStateException("No mow is moving");
-        return mow;
+    public Optional<Mow> currentMowMoving() {
+        return ofNullable(currentMowMoving);
     }
 
     @Override

@@ -5,6 +5,7 @@ import com.google.inject.Injector;
 import com.google.inject.testing.fieldbinder.Bind;
 import com.google.inject.testing.fieldbinder.BoundFieldModule;
 import com.google.inject.util.Modules;
+import domain.exceptions.MalformedInstructionException;
 import domain.model.instructions.Instruction;
 import domain.model.instructions.mow.MoveMowForwardInstruction;
 import domain.model.instructions.mow.MoveMowInstructionList;
@@ -67,10 +68,18 @@ class MoveMowInstructionFactoryTest {
     }
 
     @ParameterizedTest
+    @ValueSource(strings = {" ", "1", "agd"})
+    public void should_throw_malformed_exception(String value){
+        assertThrows(MalformedInstructionException.class, () -> {
+            moveMowInstructionFactory.build(value);
+        });
+    }
+
+    @ParameterizedTest
     @EmptySource
     @NullSource
-    @ValueSource(strings = {"", " ", "1", "agd"})
-    public void should_throw_error(String value){
+    @ValueSource(strings = {""})
+    public void should_throw_illegal_argument_exception(String value){
         assertThrows(IllegalArgumentException.class, () -> {
             moveMowInstructionFactory.build(value);
         });

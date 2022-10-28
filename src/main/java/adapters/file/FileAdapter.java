@@ -13,7 +13,7 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Stream;
 
-@AllArgsConstructor(access = AccessLevel.PUBLIC, onConstructor = @__({ @Inject}))
+@AllArgsConstructor(access = AccessLevel.PRIVATE, onConstructor = @__({ @Inject}))
 public class FileAdapter {
 
     private final Client client;
@@ -32,7 +32,7 @@ public class FileAdapter {
             linesStream = Files.lines(path);
             return linesStream.toList();
         } catch(IOException e){
-            throw new IllegalStateException("An error occured when parsing the file", e);
+            throw new MalformedFileException("An error occured when parsing the file :", e);
         } finally {
             if(linesStream != null)
                 linesStream.close();

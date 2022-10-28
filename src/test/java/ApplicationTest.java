@@ -1,7 +1,10 @@
 import adapters.file.FileAdapter;
 import adapters.input.InputAdapter;
+import adapters.repositories.EntityNotFoundException;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import domain.exceptions.MalformedInstructionException;
+import domain.exceptions.OutsideGrassMoveException;
 import domain.model.mow.Coordinates;
 import domain.model.mow.Mow;
 import domain.model.mow.orientation.EastOrientation;
@@ -45,7 +48,7 @@ class ApplicationTest {
 
         fileAdapter.call(FILE_PATH + "mows_only_mow.txt");
 
-        Mow mow = mowRepository.currentMowMoving();
+        Mow mow = mowRepository.currentMowMoving().orElseThrow();
         assertThat(mow.getPosition().getCoordinates()).isEqualTo(expectedCoordinates);
         assertThat(mow.getPosition().getOrientation()).isInstanceOf(NorthOrientation.class);
     }
@@ -91,7 +94,7 @@ class ApplicationTest {
                 "10 10 E"
         };
 
-        assertThrows(IllegalArgumentException.class, () -> {
+        assertThrows(EntityNotFoundException.class, () -> {
             inputAdapter.call(inputs);
         });
     }
@@ -102,7 +105,7 @@ class ApplicationTest {
                 "10 10", "GAGADDDDDGAA"
         };
 
-        assertThrows(IllegalArgumentException.class, () -> {
+        assertThrows(EntityNotFoundException.class, () -> {
             inputAdapter.call(inputs);
         });
     }
@@ -113,7 +116,18 @@ class ApplicationTest {
                 "10 10", "7 8 N", "GAGATTTDDDDDGAA"
         };
 
-        assertThrows(IllegalArgumentException.class, () -> {
+        assertThrows(MalformedInstructionException.class, () -> {
+            inputAdapter.call(inputs);
+        });
+    }
+
+    @Test
+    void should_throw_exception_because_of_out_of_grass_dimension_move() {
+        String[] inputs = new String[]{
+                "10 10", "7 8 N", "GAGAAAAAAAAAAAAAAA"
+        };
+
+        assertThrows(OutsideGrassMoveException.class, () -> {
             inputAdapter.call(inputs);
         });
     }
