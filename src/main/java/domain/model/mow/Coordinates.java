@@ -9,8 +9,8 @@ import lombok.Getter;
 @AllArgsConstructor
 public class Coordinates {
 
-    int x;
-    int y;
+    private int x;
+    private int y;
 
     public Coordinates up() {
         return new Coordinates(x, y + 1);
@@ -21,7 +21,7 @@ public class Coordinates {
     }
 
     public Coordinates right(){
-        return new Coordinates(x+ 1, y);
+        return new Coordinates(x + 1, y);
     }
 
     public Coordinates left(){
