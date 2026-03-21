@@ -26,16 +26,10 @@ public class FileAdapter {
     }
 
     private List<String> extractInstructions(String filePath) {
-        Stream<String> linesStream = null;
-        try{
-            Path path = Paths.get(filePath);
-            linesStream = Files.lines(path);
+        try (Stream<String> linesStream = Files.lines(Paths.get(filePath))) {
             return linesStream.toList();
-        } catch(IOException e){
-            throw new MalformedFileException("An error occured when parsing the file :", e);
-        } finally {
-            if(linesStream != null)
-                linesStream.close();
+        } catch (IOException e) {
+            throw new MalformedFileException("An error occurred when parsing the file: " + filePath, e);
         }
     }
 }

@@ -25,7 +25,7 @@ public class Mow {
 
     public void move(Grass grass) {
         Position newPosition = position.move();
-        if(grass.outOfBounds(newPosition.getCoordinates())) {
+        if(grass.isWithinBounds(newPosition.getCoordinates())) {
             position = newPosition;
         } else {
             throw new OutsideGrassMoveException("Move out of bound for mow located at " + this.position + " and new position " + newPosition + " and grass dimension " + grass);

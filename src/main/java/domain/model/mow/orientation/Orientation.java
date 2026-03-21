@@ -11,15 +11,21 @@ public abstract class Orientation {
     public final static String EAST_INSTRUCTION = "E";
     public final static String WEST_INSTRUCTION = "W";
 
+    // Singleton instances (Flyweight pattern)
+    public static final Orientation NORTH = new NorthOrientation();
+    public static final Orientation SOUTH = new SouthOrientation();
+    public static final Orientation EAST = new EastOrientation();
+    public static final Orientation WEST = new WestOrientation();
+
     public static Orientation fromLibelle(String libelle){
         if(SOUTH_INSTRUCTION.equals(libelle))
-            return new SouthOrientation();
+            return SOUTH;
         if(NORTH_INSTRUCTION.equals(libelle))
-            return new NorthOrientation();
+            return NORTH;
         if(EAST_INSTRUCTION.equals(libelle))
-            return new EastOrientation();
+            return EAST;
         if(WEST_INSTRUCTION.equals(libelle))
-            return new WestOrientation();
+            return WEST;
         throw new IllegalArgumentException("incorrect Orientation Label : " + libelle);
     }
 

@@ -1,15 +1,13 @@
 import adapters.file.FileAdapter;
 import adapters.input.InputAdapter;
-import adapters.repositories.EntityNotFoundException;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import domain.exceptions.EntityNotFoundException;
 import domain.exceptions.MalformedInstructionException;
 import domain.exceptions.OutsideGrassMoveException;
 import domain.model.mow.Coordinates;
 import domain.model.mow.Mow;
-import domain.model.mow.orientation.EastOrientation;
-import domain.model.mow.orientation.NorthOrientation;
-import domain.model.mow.orientation.SouthOrientation;
+import domain.model.mow.orientation.Orientation;
 import infrastructure.dependencyinversion.MowitnowModule;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -50,7 +48,7 @@ class ApplicationTest {
 
         Mow mow = mowRepository.currentMowMoving().orElseThrow();
         assertThat(mow.getPosition().getCoordinates()).isEqualTo(expectedCoordinates);
-        assertThat(mow.getPosition().getOrientation()).isInstanceOf(NorthOrientation.class);
+        assertThat(mow.getPosition().getOrientation()).isEqualTo(Orientation.NORTH);
     }
 
     @Test
@@ -64,9 +62,9 @@ class ApplicationTest {
         assertThat(mows).isNotEmpty();
         assertThat(mows).size().isEqualTo(2);
         assertThat(mows.get(0).getPosition().getCoordinates()).isEqualTo(expectedCoordinatesForFirstMow);
-        assertThat(mows.get(0).getPosition().getOrientation()).isInstanceOf(NorthOrientation.class);
+        assertThat(mows.get(0).getPosition().getOrientation()).isEqualTo(Orientation.NORTH);
         assertThat(mows.get(1).getPosition().getCoordinates()).isEqualTo(expectedCoordinatesForSecondMow);
-        assertThat(mows.get(1).getPosition().getOrientation()).isInstanceOf(EastOrientation.class);
+        assertThat(mows.get(1).getPosition().getOrientation()).isEqualTo(Orientation.EAST);
     }
 
     @Test
@@ -81,11 +79,11 @@ class ApplicationTest {
         assertThat(mows).isNotEmpty();
         assertThat(mows).size().isEqualTo(3);
         assertThat(mows.get(0).getPosition().getCoordinates()).isEqualTo(expectedCoordinatesForFirstMow);
-        assertThat(mows.get(0).getPosition().getOrientation()).isInstanceOf(NorthOrientation.class);
+        assertThat(mows.get(0).getPosition().getOrientation()).isEqualTo(Orientation.NORTH);
         assertThat(mows.get(1).getPosition().getCoordinates()).isEqualTo(expectedCoordinatesForSecondMow);
-        assertThat(mows.get(1).getPosition().getOrientation()).isInstanceOf(EastOrientation.class);
+        assertThat(mows.get(1).getPosition().getOrientation()).isEqualTo(Orientation.EAST);
         assertThat(mows.get(2).getPosition().getCoordinates()).isEqualTo(expectedCoordinatesForThirdMow);
-        assertThat(mows.get(2).getPosition().getOrientation()).isInstanceOf(SouthOrientation.class);
+        assertThat(mows.get(2).getPosition().getOrientation()).isEqualTo(Orientation.SOUTH);
     }
 
     @Test

@@ -97,3 +97,75 @@ AADAADADDA       # Second mow instructions
 - Test resources in `src/test/resources/` contain sample instruction files (mows.txt, mows_3.txt, etc.)
 - Tests use JUnit 5 with Mockito for mocking and AssertJ for assertions
 - MowitnowModuleTest validates dependency injection configuration
+- Comprehensive edge case testing for boundary conditions and null safety
+
+## Code Quality & Best Practices
+
+### Architectural Compliance
+
+**Dependency Direction**: The project strictly follows hexagonal architecture principles:
+- Domain layer has NO dependencies on adapters or infrastructure
+- All domain exceptions are in `domain/exceptions/` (e.g., EntityNotFoundException)
+- Services in domain layer only depend on ports (interfaces) and other domain classes
+- Adapters implement ports and depend on domain, never the reverse
+
+**Layer Violations to Avoid**:
+- Never import adapter classes in domain services
+- Domain exceptions should not be in adapter packages
+- All repository implementations must be in adapters, interfaces in ports
+
+### Design Pattern Implementations
+
+**Flyweight Pattern - Orientation Classes**:
+- Orientation instances are singletons accessed via `Orientation.NORTH`, `Orientation.SOUTH`, etc.
+- Never instantiate orientation classes directly (they are package-private)
+- This reduces memory overhead as orientations are immutable and stateless
+
+**Repository Pattern - Collection Exposure**:
+- Repository methods returning collections MUST return unmodifiable views
+- Use `Collections.unmodifiableList()` to prevent external modification of internal state
+- Example: `InMemoryMowRepository.all()` returns unmodifiable list
+
+### Resource Management
+
+**File I/O**:
+- Always use try-with-resources for streams and file operations
+- Example in FileAdapter uses `try (Stream<String> linesStream = Files.lines(...))`
+- This ensures proper resource cleanup even when exceptions occur
+
+### Exception Handling
+
+**Specific Exceptions**:
+- Catch specific exceptions rather than broad RuntimeException
+- Example in MowFactory catches `NumberFormatException | ArrayIndexOutOfBoundsException`
+- Provide meaningful error messages with context (e.g., include the malformed input)
+
+**Null Safety**:
+- Use `Objects.requireNonNull()` for parameter validation
+- Provides clear error messages: `Objects.requireNonNull(coordinates, "coordinates cannot be null")`
+- Fail fast with explicit messages rather than allowing NPE
+
+### Naming Conventions
+
+**Method Names**:
+- Methods should clearly express intent: `isWithinBounds()` not `outOfBounds()` when returning true for valid positions
+- Test methods use format: `should_<action>_when_<condition>` or `should_<expected_behavior>`
+- Boolean methods use `is`, `has`, `should` prefixes
+
+**Exception Messages**:
+- Include relevant context in exception messages
+- Example: `"An error occurred when parsing the file: " + filePath`
+- Use correct spelling (occurred not occured)
+
+### Testing Guidelines
+
+**Test Coverage Requirements**:
+- All domain models should have unit tests covering edge cases
+- Boundary testing is critical (min, max, zero, negative values)
+- Null safety must be tested for all public methods accepting object parameters
+- Test both success and failure paths
+
+**Test Organization**:
+- One test class per production class (e.g., GrassTest for Grass)
+- Use `@ParameterizedTest` with `@CsvSource` or `@ValueSource` for multiple scenarios
+- Use descriptive test names that document expected behavior

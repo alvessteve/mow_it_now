@@ -31,8 +31,8 @@ public class MowFactory {
             var x = parseInt(positionDetails[X_COORDINATES_INDEX]);
             var y = parseInt(positionDetails[Y_COORDINATES_INDEX]);
             coordinates = new Coordinates(x, y);
-        } catch (RuntimeException e) {
-            throw new MalformedCoordinatesInstruction("Incorrect coordinates format", e);
+        } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+            throw new MalformedCoordinatesInstruction("Incorrect coordinates format: " + instruction, e);
         }
 
         var orientation = Orientation.fromLibelle(positionDetails[ORIENTATION_INDEX]);

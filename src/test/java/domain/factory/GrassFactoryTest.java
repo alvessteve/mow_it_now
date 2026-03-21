@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class GrassFactoryTest {
 
     @Test
-    public void should_instanciate_grass(){
+    public void should_build_grass_with_valid_dimensions(){
         Coordinates expectedCoordinates = new Coordinates(1,2);
 
         Grass grass = GrassFactory.build("1 2");

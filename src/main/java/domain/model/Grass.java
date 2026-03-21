@@ -3,6 +3,8 @@ package domain.model;
 import domain.model.mow.Coordinates;
 import lombok.Getter;
 
+import java.util.Objects;
+
 @Getter
 public class Grass {
 
@@ -14,11 +16,13 @@ public class Grass {
         this.dimension = dimension;
     }
 
-    public boolean outOfBounds(Coordinates coordinates) {
-        if (coordinates.getX() < 0 || coordinates.getX() > dimension.getX() + 1) {
-            return false;
-        }
-        return coordinates.getY() >= 0 && coordinates.getY() <= dimension.getY() + 1;
+    public boolean isWithinBounds(Coordinates coordinates) {
+        Objects.requireNonNull(coordinates, "coordinates cannot be null");
+
+        boolean xWithinBounds = coordinates.getX() >= 0 && coordinates.getX() <= dimension.getX();
+        boolean yWithinBounds = coordinates.getY() >= 0 && coordinates.getY() <= dimension.getY();
+
+        return xWithinBounds && yWithinBounds;
     }
 
     @Override

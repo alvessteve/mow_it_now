@@ -1,7 +1,7 @@
 package domain.service;
 
-import adapters.repositories.EntityNotFoundException;
 import com.google.inject.Inject;
+import domain.exceptions.EntityNotFoundException;
 import domain.factory.GrassFactory;
 import domain.model.Grass;
 import lombok.AccessLevel;

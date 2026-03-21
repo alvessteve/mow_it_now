@@ -1,7 +1,7 @@
 package domain.service;
 
-import adapters.repositories.EntityNotFoundException;
 import com.google.inject.Inject;
+import domain.exceptions.EntityNotFoundException;
 import domain.factory.MowFactory;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -18,11 +18,11 @@ public class MowService {
         var mow = MowFactory.build(instruction);
         var grass = grassService.retrieve();
 
-        if(grass.outOfBounds(mow.getPosition().getCoordinates())){
+        if(grass.isWithinBounds(mow.getPosition().getCoordinates())){
             mowRepository.add(mow);
             mowRepository.setToCurrentMowMowing(mow);
         } else {
-            throw new IndexOutOfBoundsException();
+            throw new IndexOutOfBoundsException("Mow position is outside grass boundaries");
         }
     }
 

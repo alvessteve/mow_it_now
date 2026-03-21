@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import ports.MowRepository;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,7 +35,7 @@ public class InMemoryMowRepository implements MowRepository {
 
     @Override
     public List<Mow> all() {
-        return mowList;
+        return Collections.unmodifiableList(mowList);
     }
 
 }

@@ -3,7 +3,7 @@ package domain.factory;
 import domain.exceptions.MalformedInstructionException;
 import domain.model.mow.Coordinates;
 import domain.model.mow.Position;
-import domain.model.mow.orientation.NorthOrientation;
+import domain.model.mow.orientation.Orientation;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EmptySource;
@@ -16,9 +16,9 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class MowFactoryTest {
 
     @Test
-    public void should_instanciate_mow(){
+    public void should_build_mow_with_valid_coordinates_and_orientation(){
         var coordinates = new Coordinates(1,2);
-        var expectedPosition = new Position(coordinates, new NorthOrientation());
+        var expectedPosition = new Position(coordinates, Orientation.NORTH);
 
         var mow = MowFactory.build("1 2 N");
 
