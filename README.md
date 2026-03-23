@@ -37,6 +37,11 @@ GAGAGAGAA        # Instructions (G=forward, A=turn right, D=turn left)
 AADAADADDA       # Second mow instructions
 ```
 
+### Running it from the cli
+```bash
+./gradlew run --args='"5 5" "1 2 N" "GAGAGAGAA" "3 3 E" "AADAADADDA"'
+```
+
 ### Building & Testing
 ```bash
 # Build the project
